@@ -44,13 +44,14 @@ class MovieDBHelper
         }
     }
 
-    public function getMovies(): MovieList
+    public function getMovies(): MovieList|Exception
     {
         try {
             $path = 'trending/movie/day';
             $response = $this->client->request('GET', $path, [
                 'query' => [
                     'language' => 'fr',
+                    'page' => 1
                 ],
             ]);
 
@@ -58,8 +59,28 @@ class MovieDBHelper
             $movies = $this->serializer->deserialize(json_encode($movieList->results), Movie::class.'[]', 'json', ['groups' => ['group.list']]);
             $movieList->results = $movies;
             return $movieList;
-            
-            return [];
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die;
+        }
+    }
+
+    public function getBestMovie(): Movie|null
+    {
+        try {
+            $path = 'movie/top_rated';
+            $response = $this->client->request('GET', $path, [
+                'query' => [
+                    'language' => 'fr',
+                    'page' => 1
+                ],
+            ]);
+
+            if(array_key_exists("results", $response->toArray())) {
+                $movies = $this->serializer->deserialize(json_encode($response->toArray()["results"]), Movie::class.'[]', 'json', ['groups' => ['group.view']]);
+                return count($movies) > 0 ? $movies[1]:null;
+            }
+            return null;
         } catch (Exception $e) {
             echo $e->getMessage();
             die;

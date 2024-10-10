@@ -22,8 +22,11 @@ class HomeController extends AbstractController
     {
         $genders = $this->movieDBHelper->getMovieGenders();
         $movieList = $this->movieDBHelper->getMovies();
+        $bestMovie = $this->movieDBHelper->getBestMovie();
+        
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'bestMovie' => $bestMovie,
             'genders' => $genders,
             'movies' => $movieList->results
         ]);

@@ -16,7 +16,19 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col">A la une</div>
+        <div class="col content-best-movie mt-3 mb-3">
+            <img src="{{ 'https://image.tmdb.org/t/p/original' ~ bestMovie.backdrop_path }}" alt="{{bestMovie.title}}" width="100%">
+            <div class="resume">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ 'https://image.tmdb.org/t/p/w500' ~ bestMovie.poster_path }}" alt="{{bestMovie.title}}" width="100%">
+                    </div>
+                    <div class="col-10">
+                        <h4 style="color:white">{{ bestMovie.title }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-3">
