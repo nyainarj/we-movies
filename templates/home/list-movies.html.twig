@@ -1,0 +1,19 @@
+{% for movie in movies %}
+    <div class="row movie item-{{ movie.id }} m-2 p-3">
+        <div class="col-3">
+            <img src="{{ 'https://image.tmdb.org/t/p/w500' ~ movie.poster_path }}" alt="{{movie.title}}" width="70%">
+        </div>
+        <div class="col-9">
+            <div>
+                <h6>{{ movie.title }}</h6>
+                <em>({{movie.vote_count}} votes)</em>
+            </div>
+            <div>
+                <p>{{ movie.overview|slice(0, 250) ~ '...' }}</p>
+            </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-primary">Lire la suite</button>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -6,6 +6,12 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    http_client:
+        scoped_clients:
+            themoviedb.client:
+                base_uri: '%env(BASE_URL_MOVIEDB)%'
+                auth_bearer: '%env(TOKEN_MOVIEDB)%'
+
     #esi: true
     #fragments: true
 
